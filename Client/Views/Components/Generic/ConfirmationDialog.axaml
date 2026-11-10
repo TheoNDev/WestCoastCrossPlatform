@@ -1,0 +1,93 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="using:Client.Models"
+        x:Class="Client.Views.Components.Generic.ConfirmationDialog"
+        x:DataType="m:ConfirmationDialogData"
+        Title="Bekräfta åtgärd"
+        Width="420"
+        SizeToContent="Height"
+        MinHeight="220"
+        CanResize="False"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource SystemRegionColor}">
+
+  <Window.Styles>
+    <Style Selector="Button.dialogButton">
+      <Setter Property="MinWidth" Value="100" />
+      <Setter Property="Height" Value="38" />
+      <Setter Property="Padding" Value="16,8" />
+      <Setter Property="CornerRadius" Value="7" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.danger">
+      <Setter Property="Background" Value="#C63838" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style Selector="Button.danger:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#A92E2E" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,Auto"
+        Margin="24"
+        RowSpacing="28">
+
+    <!-- Dialog content -->
+    <StackPanel Grid.Row="0" Spacing="14">
+
+      <StackPanel Orientation="Horizontal"
+                  Spacing="12"
+                  VerticalAlignment="Center">
+
+        <Border Background="#25DC4545"
+                Width="44"
+                Height="44"
+                CornerRadius="10">
+
+          <TextBlock Text="!"
+                     FontSize="24"
+                     FontWeight="Bold"
+                     Foreground="#DC4545"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+        </Border>
+
+        <TextBlock Text="{Binding Header}"
+                   FontSize="20"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center" />
+      </StackPanel>
+
+      <TextBlock Text="{Binding Message}"
+                 TextWrapping="Wrap"
+                 FontSize="14"
+                 LineHeight="22" />
+
+      <TextBlock Text="Den här åtgärden går inte att ångra."
+                 Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                 FontSize="12"
+                 TextWrapping="Wrap" />
+    </StackPanel>
+
+    <!-- Actions -->
+    <StackPanel Grid.Row="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                Spacing="10">
+
+      <Button Content="Avbryt"
+              Classes="dialogButton"
+              IsCancel="True"
+              Click="Cancel_Click" />
+
+      <Button Content="Radera"
+              Classes="dialogButton danger"
+              Click="Confirm_Click" />
+    </StackPanel>
+
+  </Grid>
+</Window>

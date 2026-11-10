@@ -2,6 +2,10 @@
 
 namespace Client.ViewModels;
 
-public abstract class ViewModelBase : ObservableObject
+public partial class ViewModelBase : ObservableValidator
 {
+    [ObservableProperty]
+    public partial string PageTitle { get; set; } = "";
+    [ObservableProperty]
+    public partial string PageDescription { get; set; } = "";
 }

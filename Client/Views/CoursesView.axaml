@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Client.ViewModels"
+             xmlns:cg="using:Client.Views.Components.Generic"
+             xmlns:cc="using:Client.Views.Components.Course"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.CoursesView"
+             x:DataType="vm:CoursesViewModel"
+             >
+
+  <Design.DataContext>
+    <vm:CoursesViewModel></vm:CoursesViewModel>
+  </Design.DataContext>
+
+  <Grid RowDefinitions="Auto, *" RowSpacing="24" Margin="32">
+    <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+      <StackPanel Grid.Column="0" Spacing="6">
+        <TextBlock Classes="pageTitle" Text="{Binding PageTitle}"/>
+        <TextBlock Classes="secondaryText" Text="{Binding PageDescription}"/>
+      </StackPanel>
+      <Button
+        Grid.Column="1"
+        Classes="primary"
+        VerticalAlignment="Center"
+        Command="{Binding ShowAddFormCommand}"
+        IsVisible="{Binding IsListVisible}"
+        >
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource AddIcon}" Width="16" Height="16" />
+          <TextBlock Text="Lägg till kurs" />
+        </StackPanel>
+      </Button>
+    </Grid>
+
+    <Grid Grid.Row="1">
+      <Border
+        IsVisible="{Binding IsListVisible}"
+        Background="{DynamicResource SurfaceBrush}"
+        BorderBrush="{DynamicResource BorderBrush}"
+        BorderThickness="1"
+        CornerRadius="12"
+        Padding="24"
+        >
+        <Grid RowDefinitions="Auto,*" RowSpacing="16">
+          <TextBlock Grid.Row="0" Classes="sectionTitle" Text="Alla kurser" />
+          <cg:EntityTable Grid.Row="1" ItemsSource="{Binding Courses}" SelectedEntity="{Binding SelectedCourse}"/>
+        </Grid>
+      </Border>
+
+      <Border
+        IsVisible="{Binding IsFormVisible}"
+        Background="{DynamicResource SurfaceBrush}"
+        BorderBrush="{DynamicResource BorderBrush}"
+        BorderThickness="1"
+        CornerRadius="12"
+        Padding="24"
+        >
+        <cc:CourseForm/>
+      </Border>
+
+      <Border
+        IsVisible="{Binding IsDetailsVisible}"
+        Background="{DynamicResource SurfaceBrush}"
+        BorderBrush="{DynamicResource BorderBrush}"
+        BorderThickness="1"
+        CornerRadius="12"
+        Padding="24"
+        >
+        <cc:CourseDetails/>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Client.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.Components.Course.CourseForm"
+             x:DataType="vm:CoursesViewModel"
+             >
+  <Grid RowDefinitions="Auto, *, Auto" RowSpacing="24">
+    <StackPanel Grid.Row="0" Spacing="6">
+      <TextBlock Classes="sectionTitle" Text="{Binding FormTitle}" />
+      <TextBlock Classes="secondaryText" Text="{Binding FormDescription}" />
+    </StackPanel>
+    <Grid
+      Grid.Row="1"
+      ColumnDefinitions="*, *"
+      RowDefinitions="Auto,Auto,Auto"
+      ColumnSpacing="20"
+      RowSpacing="16"
+      >
+      <StackPanel Grid.Row="0" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Kursnummer"/>
+        <TextBox Text="{Binding Form.CourseNumber}" />
+      </StackPanel>
+      <StackPanel Grid.Row="0" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Namn"/>
+        <TextBox Text="{Binding Form.Title}" />
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Längd (veckor)"/>
+        <NumericUpDown
+          Value="{Binding Form.Duration}"
+          Minimum="1"
+          Maximum="104"
+          Increment="1"
+          FormatString="N0"
+          />
+      </StackPanel>
+      <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Plats"/>
+        <ComboBox
+          ItemsSource="{Binding Form.Locations}"
+          SelectedItem="{Binding Form.Location}"
+          PlaceholderText="Välj plats"
+          />
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Startdatum"/>
+        <CalendarDatePicker
+          SelectedDate="{Binding Form.StartDate}"
+          SelectedDateFormat="Custom"
+          CustomDateFormatString="yyyy-MM-dd"
+          />
+      </StackPanel>
+      <StackPanel Grid.Row="2" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Slutdatum"/>
+        <CalendarDatePicker
+          SelectedDate="{Binding Form.EndDate}"
+          SelectedDateFormat="Custom"
+          CustomDateFormatString="yyyy-MM-dd"
+          />
+      </StackPanel>
+    </Grid>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+      <Button
+        Classes="secondary"
+        Command="{Binding CancelFormCommand}"
+        >
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource CloseIcon}" Width="16" Height="16" />
+          <TextBlock Text="Avbryt" />
+        </StackPanel>
+      </Button>
+      <Button
+        Classes="primary"
+        Command="{Binding SaveCourseCommand}"
+        >
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource SaveIcon}" Width="16" Height="16" />
+          <TextBlock Text="Spara" />
+        </StackPanel>
+      </Button>
+    </StackPanel>
+  </Grid>
+</UserControl>

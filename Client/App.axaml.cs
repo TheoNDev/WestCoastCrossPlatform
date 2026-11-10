@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Client.Helpers;
 using Client.ViewModels;
 using Client.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client;
 
@@ -15,11 +17,16 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var collection = new ServiceCollection();
+        collection.AddServices();
+
+        var serviceProvider = collection.BuildServiceProvider();
+        var vm = serviceProvider.GetRequiredService<MainViewModel>();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(),
+                DataContext = vm,
             };
         }
 

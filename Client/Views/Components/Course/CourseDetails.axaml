@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Client.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.Components.Course.CourseDetails"
+             x:DataType="vm:CoursesViewModel"
+             >
+  <Grid RowDefinitions="Auto,*,Auto" RowSpacing="24">
+    <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+      <StackPanel Grid.Column="0" Spacing="6">
+        <TextBlock  Classes="sectionTitle" Text="{Binding DetailsTitle}" />
+        <TextBlock  Classes="secondaryText" Text="{Binding DetailsDescription}" />
+      </StackPanel>
+      <TextBlock Grid.Column="1" Classes="bodyText" Text="{Binding SelectedCourse.CourseNumber}" />
+    </Grid>
+
+    <Grid
+      Grid.Row="1"
+      ColumnDefinitions="*, *"
+      RowDefinitions="Auto,Auto,Auto"
+      ColumnSpacing="30"
+      RowSpacing="20"
+      >
+      <StackPanel Grid.Row="0" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Namn" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.Title}" />
+      </StackPanel>
+      <StackPanel Grid.Row="0" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Kursnummer" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.CourseNumber}" />
+      </StackPanel>
+      <StackPanel Grid.Row="1" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Längd (veckor)" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.Duration}" />
+      </StackPanel>
+      <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Plats" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.Location}" />
+      </StackPanel>
+      <StackPanel Grid.Row="2" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Startdatum" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.StartDate}" />
+      </StackPanel>
+      <StackPanel Grid.Row="2" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Slutdatum" />
+        <TextBlock Classes="bodyText" Text="{Binding SelectedCourse.EndDate}" />
+      </StackPanel>
+    </Grid>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+      <Button Classes="secondary" Command="{Binding ToListCommand}">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource BackIcon}" Width="16" Height="16" />
+          <TextBlock Text="Tillbaka" />
+        </StackPanel>
+      </Button>
+      <Button Classes="primary" Command="{Binding ShowEditFormCommand}">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource EditIcon}" Width="16" Height="16" />
+          <TextBlock Text="Redigera" />
+        </StackPanel>
+      </Button>
+      <Button Classes="danger" Command="{Binding DeleteCourseCommand}">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource DeleteIcon}" Width="16" Height="16" />
+          <TextBlock Text="Radera" />
+        </StackPanel>
+      </Button>
+    </StackPanel>
+  </Grid>
+</UserControl>

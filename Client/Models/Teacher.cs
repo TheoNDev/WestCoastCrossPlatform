@@ -1,6 +1,8 @@
-﻿using WestcoastEducation.Enums;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
-namespace WestcoastEducation.Models;
+namespace Client.Models;
 
 public class Teacher(
     string firstName,
@@ -10,17 +12,17 @@ public class Teacher(
     Address address,
     string fieldOfKnowledge,
     List<Course> courses
-        ) : Staff(
-        firstName,
-        lastName,
-        phoneNumber,
-        socialSecurityNumber,
-        address,
-        Role.Lärare,
-        fieldOfKnowledge,
-        courses
+        ) : Person(
+            firstName,
+            lastName,
+            phoneNumber,
+            socialSecurityNumber,
+            address
         )
 
 {
-
+    [Display(Name = "Kunskapsområde", Order = 6)]
+    public string FieldOfKnowledge { get; set; } = fieldOfKnowledge;
+    [ScaffoldColumn(false)]
+    public List<Course> Courses { get; set; } = courses;
 }

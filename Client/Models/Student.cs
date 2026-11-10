@@ -1,6 +1,4 @@
-﻿using WestcoastEducation.Enums;
-
-namespace WestcoastEducation.Models;
+﻿namespace Client.Models;
 
 public class Student
 (
@@ -16,8 +14,7 @@ Person
     lastName,
     phoneNumber,
     socialSecurityNumber,
-    address,
-    Role.Student
+    address
 )
 {
 

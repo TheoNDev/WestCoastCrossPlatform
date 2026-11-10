@@ -3,20 +3,93 @@
         xmlns:vm="using:Client.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:enums="using:Client.Enums"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Client.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
         Title="Client">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
-
+    <Grid Background="{DynamicResource AppBackgroundBrush}" ColumnDefinitions="240, *">
+        <Border Grid.Column="0" Background="{DynamicResource SidebarBackgroundBrush}">
+            <Grid RowDefinitions="Auto, *" Margin="16" RowSpacing="24">
+                <StackPanel Grid.Row="0" Spacing="20">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border
+                            Width="44"
+                            Height="44"
+                            CornerRadius="10"
+                            Background="{DynamicResource AccentBrush}"
+                            >
+                            <PathIcon
+                                Data="{StaticResource TeachersIcon}"
+                                Width="24"
+                                Height="24"
+                                Foreground="White"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                />
+                        </Border>
+                        <StackPanel Spacing="2" VerticalAlignment="Center">
+                            <TextBlock
+                                Text="WestCoast"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                />
+                            <TextBlock
+                                Text="Education"
+                                FontSize="12"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                />
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Height="1"
+                            Background="{DynamicResource BorderBrush}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Spacing="10">
+                    <Button
+                        Classes="nav"
+                        Classes.active="{Binding IsCoursesActive}"
+                        Command="{Binding GoToCommand}"
+                        CommandParameter="{x:Static enums:PageViewsEnum.Courses}"
+                        >
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource CoursesIcon}" Width="18" Height="18" />
+                            <TextBlock Text="Kurser" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Classes="nav"
+                        Classes.active="{Binding IsStudentsActive}"
+                        Command="{Binding GoToCommand}"
+                        CommandParameter="{x:Static enums:PageViewsEnum.Students}"
+                        >
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource StudentsIcon}" Width="18" Height="18" />
+                            <TextBlock Text="Studenter" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Classes="nav"
+                        Classes.active="{Binding IsTeachersActive}"
+                        Command="{Binding GoToCommand}"
+                        CommandParameter="{x:Static enums:PageViewsEnum.Teachers}"
+                        >
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource TeachersIcon}" Width="18" Height="18" />
+                            <TextBlock Text="Lärare" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <UserControl Grid.Column="1" Padding="20" Content="{Binding CurrentView}"/>
+    </Grid>
 </Window>

@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Client.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.Components.Teacher.TeacherForm"
+             x:DataType="vm:TeachersViewModel"
+             >
+
+  <Grid RowDefinitions="Auto, *, Auto" RowSpacing="24">
+    <StackPanel Grid.Row="0" Spacing="6">
+      <TextBlock Classes="sectionTitle" Text="{Binding FormTitle}" />
+      <TextBlock Classes="secondaryText" Text="{Binding FormDescription}" />
+    </StackPanel>
+    <Grid
+      Grid.Row="1"
+      ColumnDefinitions="*, *"
+      RowDefinitions="Auto, Auto, Auto, Auto"
+      ColumnSpacing="20"
+      RowSpacing="16"
+      >
+      <StackPanel Grid.Row="0" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Förnamn"/>
+        <TextBox Text="{Binding Form.FirstName}" />
+      </StackPanel>
+      <StackPanel Grid.Row="0" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Efternamn"/>
+        <TextBox Text="{Binding Form.LastName}" />
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Telefonnummer"/>
+        <TextBox Text="{Binding Form.PhoneNumber}" />
+      </StackPanel>
+      <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Personnummer"/>
+        <TextBox Text="{Binding Form.SocialSecurityNumber}" />
+      </StackPanel>
+      <StackPanel Grid.Row="2" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Gatuaddress"/>
+        <TextBox Text="{Binding Form.StreetName}" />
+      </StackPanel>
+      <StackPanel Grid.Row="2" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Postnummer"/>
+        <TextBox Text="{Binding Form.ZipCode}" />
+      </StackPanel>
+      <StackPanel Grid.Row="3" Grid.Column="0" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Stad"/>
+        <TextBox Text="{Binding Form.City}" />
+      </StackPanel>
+      <StackPanel Grid.Row="3" Grid.Column="1" Spacing="6">
+        <TextBlock Classes="secondaryText" Text="Kunskapsområde"/>
+        <TextBox Text="{Binding Form.FieldOfKnowledge}" />
+      </StackPanel>
+    </Grid>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+      <Button
+        Classes="secondary"
+        Command="{Binding CancelFormCommand}"
+        >
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource CloseIcon}" Width="16" Height="16" />
+          <TextBlock Text="Avbryt" />
+        </StackPanel>
+      </Button>
+      <Button
+        Classes="primary"
+        Command="{Binding SaveTeacherCommand}"
+        >
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="{StaticResource SaveIcon}" Width="16" Height="16" />
+          <TextBlock Text="Spara" />
+        </StackPanel>
+      </Button>
+    </StackPanel>
+  </Grid>
+</UserControl>
